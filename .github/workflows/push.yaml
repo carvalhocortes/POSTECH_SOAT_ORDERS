@@ -8,7 +8,7 @@ env:
   AWS_REGION: us-west-2
   CLUSTER_NAME: eks-fiap-soat10-prod
   AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-  AWS_ECR_NAME: fiap-payments-prod
+  AWS_ECR_NAME: fiap-orders-prod
 
 jobs:
   deploy:
