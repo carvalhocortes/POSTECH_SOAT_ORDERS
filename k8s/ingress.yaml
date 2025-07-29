@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: fiap-fast-food-app-orders-ingress
+  name: fiap-fast-food-app-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
@@ -14,5 +14,19 @@ spec:
             backend:
               service:
                 name: fiap-fast-food-app-orders
+                port:
+                  number: 80
+          - path: /payment
+            pathType: Prefix
+            backend:
+              service:
+                name: fiap-fast-food-app-payments
+                port:
+                  number: 80
+          - path: /production
+            pathType: Prefix
+            backend:
+              service:
+                name: fiap-fast-food-app-production
                 port:
                   number: 80
