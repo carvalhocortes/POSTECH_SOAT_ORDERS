@@ -1,5 +1,5 @@
 import * as dynamoose from 'dynamoose';
-import { env } from '../../../config/env';
+// import { env } from '../../../config/env';
 
 class Database {
   private constructor() {}
@@ -7,11 +7,11 @@ class Database {
   private static ddb() {
     return new dynamoose.aws.ddb.DynamoDB({
       credentials: {
-        accessKeyId: env.AWS_ACCESS_KEY_ID,
-        secretAccessKey: env.AWS_SECRET_ACCESS_KEY,
-        sessionToken: env.AWS_SESSION_TOKEN,
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+        sessionToken: process.env.AWS_SESSION_TOKEN,
       },
-      region: env.AWS_REGION,
+      region: process.env.AWS_REGION!,
     });
   }
 
