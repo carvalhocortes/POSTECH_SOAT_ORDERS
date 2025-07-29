@@ -15,7 +15,7 @@ export interface OrderProps {
   status: OrderStatus;
   orderNumber: number;
   paymentStatus: PaymentStatus;
-  paymentId: string;
+  paymentId?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -40,7 +40,7 @@ export class Order {
     this.status = props.status;
     this.paymentStatus = props.paymentStatus;
     this.orderNumber = props.orderNumber;
-    this.paymentId = props.paymentId;
+    this.paymentId = this.id;
     this.createdAt = props.createdAt || new Date();
     this.updatedAt = props.updatedAt || new Date();
   }
