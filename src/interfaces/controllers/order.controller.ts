@@ -4,9 +4,7 @@ import { DeleteOrderUseCase } from '@application/use-cases/order/DeleteOrder.use
 import { GetOrderByIdUseCase } from '@application/use-cases/order/GetOrderById.useCase';
 import { GetOrderByNumberUseCase } from '@application/use-cases/order/GetOrderByNumber.useCase';
 import { ListOrdersUseCase } from '@application/use-cases/order/ListOrders.useCase';
-import { UpdateOrderStatusUseCase } from '@application/use-cases/order/UpdateOrderStatus.useCase';
 import { CreateOrderDTO } from '@application/dto/order/CreateOrder.dto';
-import { UpdateOrderStatusDTO } from '@application/dto/order/UpdateOrderStatus.dto';
 import { NotFoundError } from '@shared/errors/NotFoundError';
 
 export class OrderController {
@@ -15,7 +13,6 @@ export class OrderController {
     private readonly listOrdersUseCase: ListOrdersUseCase,
     private readonly getOrderByIdUseCase: GetOrderByIdUseCase,
     private readonly getOrderByNumberUseCase: GetOrderByNumberUseCase,
-    private readonly updateOrderStatusUseCase: UpdateOrderStatusUseCase,
     private readonly deleteOrderUseCase: DeleteOrderUseCase,
   ) {}
 
@@ -40,12 +37,6 @@ export class OrderController {
   listOrders = async (_: Request, res: Response): Promise<void> => {
     const orders = await this.listOrdersUseCase.execute();
     res.json(orders);
-  };
-
-  updateOrderStatus = async ({ body, params }: Request, res: Response): Promise<void> => {
-    const dto = UpdateOrderStatusDTO.create({ params, body });
-    const order = await this.updateOrderStatusUseCase.execute(dto);
-    res.json(order);
   };
 
   deleteOrder = async ({ params }: Request, res: Response): Promise<void> => {

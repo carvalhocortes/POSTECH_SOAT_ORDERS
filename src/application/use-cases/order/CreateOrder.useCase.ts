@@ -3,7 +3,6 @@ import { OrderRepository } from '@interfaces/gateways/OrderRepository.gateway';
 import { ProductRepository } from '@interfaces/gateways/ProductRepository.gateway';
 import { CustomerRepository } from '@interfaces/gateways/CustomerRepository.gateway';
 import { CounterRepository } from '@interfaces/gateways/CounterRepository.gateway';
-import { PaymentGateway } from '@interfaces/gateways/PaymentGateway.gateway';
 import { CounterService } from '@application/services/CounterService';
 import { CreateOrderDTO } from '@application/dto/order/CreateOrder.dto';
 import { NotFoundError } from '@shared/errors/NotFoundError';
@@ -16,7 +15,6 @@ export class CreateOrderUseCase {
     private readonly productRepository: ProductRepository,
     private readonly customerRepository: CustomerRepository,
     private readonly counterRepository: CounterRepository,
-    private readonly paymentGateway: PaymentGateway,
   ) {
     this.counterService = new CounterService(counterRepository);
   }
@@ -42,8 +40,6 @@ export class CreateOrderUseCase {
 
     const orderNumber = await this.counterService.getNextSequenceNumber('orderNumber');
 
-    const paymentId = await this.paymentGateway.createPayment(total, orderNumber);
-
     const order = Order.create({
       customerId,
       products,
@@ -51,7 +47,6 @@ export class CreateOrderUseCase {
       orderNumber,
       status: 'received',
       paymentStatus: 'pending',
-      paymentId,
     });
 
     return this.orderRepository.save(order);
