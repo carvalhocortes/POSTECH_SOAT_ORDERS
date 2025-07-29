@@ -35,10 +35,8 @@ class Server {
       const topicArn = process.env.SNS_ORDER_TOPIC_ARN || '';
       console.log('');
       console.log('');
-      console.log('');
       console.log(`Listening to SQS queue: ${queueUrl}`);
       console.log(`Publishing to SNS topic: ${topicArn}`);
-      console.log('');
       console.log('');
       console.log('');
       const sqsListener = createSqsListener(queueUrl, topicArn);
