@@ -2,12 +2,7 @@ import * as dynamoose from 'dynamoose';
 // import { env } from '../../../config/env';
 
 class Database {
-  private constructor() {
-    console.log('Initializing DynamoDB connection...');
-    console.log('AWS Region:', process.env.AWS_REGION);
-    console.log('AWS Access Key ID:', process.env.AWS_ACCESS_KEY_ID);
-    console.log('AWS Secret Access Key:', process.env.AWS_SECRET_ACCESS_KEY);
-  }
+  private constructor() {}
 
   private static ddb() {
     return new dynamoose.aws.ddb.DynamoDB({
@@ -31,6 +26,9 @@ class Database {
       await ddb.listTables();
       console.log('Connected to DynamoDB');
     } catch (error) {
+      console.log('AWS Region:', process.env.AWS_REGION);
+      console.log('AWS Access Key ID:', process.env.AWS_ACCESS_KEY_ID);
+      console.log('AWS Secret Access Key:', process.env.AWS_SECRET_ACCESS_KEY);
       console.log('Failed to connect to DynamoDB:', error);
       process.exit(1);
     }
