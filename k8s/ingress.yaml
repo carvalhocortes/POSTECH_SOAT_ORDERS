@@ -2,12 +2,13 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: fiap-fast-food-app-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+  # annotations:
+  #   nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
   rules:
-    - http:
+    - host: a9bc5a5347c0a4f9782f235eee8189d7-5f0748248687d86e.elb.us-west-2.amazonaws.com
+      http:
         paths:
           - path: /
             pathType: Prefix
