@@ -31,8 +31,8 @@ class Server {
     this.app.listen(env.PORT, () => {
       console.log(`🚀 Server running on port ${env.PORT}`);
 
-      const queueUrl = process.env.SQS_PAYMENT_QUEUE_URL || '';
-      const topicArn = process.env.SNS_PAYMENT_TOPIC_ARN || '';
+      const queueUrl = process.env.SQS_ORDER_QUEUE_URL || '';
+      const topicArn = process.env.SNS_ORDER_TOPIC_ARN || '';
       const sqsListener = createSqsListener(queueUrl, topicArn);
 
       const pollMessages = async () => {

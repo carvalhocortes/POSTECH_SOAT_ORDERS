@@ -9,8 +9,8 @@ env:
   CLUSTER_NAME: eks-fiap-soat10-prod
   AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
   AWS_ECR_NAME: fiap-orders-prod
-  SQS_PAYMENT_QUEUE_URL: ${{ secrets.SQS_PAYMENT_QUEUE_URL }}
-  SNS_PAYMENT_TOPIC_ARN: ${{ secrets.SNS_PAYMENT_TOPIC_ARN }}
+  SQS_ORDER_QUEUE_URL: ${{ secrets.SQS_ORDER_QUEUE_URL }}
+  SNS_ORDER_TOPIC_ARN: ${{ secrets.SNS_ORDER_TOPIC_ARN }}
 
 jobs:
   deploy:
