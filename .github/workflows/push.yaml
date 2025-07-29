@@ -9,6 +9,8 @@ env:
   CLUSTER_NAME: eks-fiap-soat10-prod
   AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
   AWS_ECR_NAME: fiap-orders-prod
+  SQS_PAYMENT_QUEUE_URL: ${{ secrets.SQS_PAYMENT_QUEUE_URL }}
+  SNS_PAYMENT_TOPIC_ARN: ${{ secrets.SNS_PAYMENT_TOPIC_ARN }}
 
 jobs:
   deploy:
@@ -50,7 +52,7 @@ jobs:
         env:
           IMAGE: ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/${{ env.AWS_ECR_NAME }}:latest
         run: |
-          kubectl apply -f k8s/configmap.yaml
+          envsubst < k8s/configmap.yaml | kubectl apply -f -
           export BASE64_ACCESS_KEY_ID=$(echo "${{ secrets.AWS_ACCESS_KEY_ID }}" | base64)
           export BASE64_SECRET_ACCESS_KEY=$(echo "${{ secrets.AWS_SECRET_ACCESS_KEY }}" | base64)
           export BASE64_SESSION_TOKEN=$(echo "${{ secrets.AWS_SESSION_TOKEN }}" | base64 -w 0)
