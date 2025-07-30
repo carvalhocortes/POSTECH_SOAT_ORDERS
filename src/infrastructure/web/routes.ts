@@ -6,15 +6,15 @@ import orderRoutes from '@infrastructure/web/routes/order.routes';
 const router = express.Router();
 
 // Health check
-router.get('/health', async (req, res) => {
+router.get('/api/health', async (req, res) => {
   res.status(200).json({
     status: 'OK',
   });
 });
 
 // Main routes
-router.use('/customers', customerRoutes);
-router.use('/products', productRoutes);
-router.use('/orders', orderRoutes);
+router.use('/api/customers', customerRoutes);
+router.use('/api/products', productRoutes);
+router.use('/api/orders', orderRoutes);
 
 export default router;
