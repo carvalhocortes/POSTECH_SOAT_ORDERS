@@ -13,7 +13,9 @@ export class SqsListener {
     processPaymentStatusUseCase: ProcessPaymentStatusUpdatedUseCase,
     updateOrderStatusUseCase: UpdateOrderStatusUseCase,
   ) {
-    this.sqs = new SQSClient({});
+    this.sqs = new SQSClient({
+      region: process.env.AWS_REGION || 'us-west-2',
+    });
     this.queueUrl = queueUrl;
     this.processPaymentStatusUseCase = processPaymentStatusUseCase;
     this.updateOrderStatusUseCase = updateOrderStatusUseCase;
